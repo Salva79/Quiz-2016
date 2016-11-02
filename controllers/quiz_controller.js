@@ -14,12 +14,14 @@ exports.answer = function(req,res){
 	models.Quiz.findAll().then(function(quiz){
 	if(req.query.respuesta === quiz[0].respuesta){
 		quiz[0].acierto++;
-		quiz[0].save({fields: ['acierto']}).then(function() { console.log('Fallo al actualizar aciertos')});
+		quiz[0].save({fields: ['acierto']}).then(function() { 
 		res.render('quizes/answer',{respuesta: 'Correcto'});
+		});
 	}else{
-		quiz[0].fallo++
-		quiz[0].save({fields: ['fallo']}).then(function() { console.log('Fallo al actualizar fallos')});
+		quiz[0].fallo++;
+		quiz[0].save({fields: ['fallo']}).then(function() { 
 		res.render('quizes/fault',{respuesta: 'Incorrecto', aciertos: quiz[0].acierto});
+		});
 	}
 
 	})
