@@ -15,7 +15,6 @@ exports.load = function(req,res,next,quizId){
 };
 
 // GET /quiz - index
-
 exports.index =function(req,res){
 	models.Quiz.findAll().then(function(quizes){
 		res.render('quizes/index',{quizes: quizes});			
@@ -23,23 +22,22 @@ exports.index =function(req,res){
 };
 
 // GET /quiz/quiz/:id
-
 exports.show =function(req,res){
-	res.render('quizes/show',{quiz: req.quiz});				
+	res.render('quizes/show',{quiz: req.quiz, fallos: req.query.fallos});				
 };
 
 //GET /quiz/:id/answer
-
 exports.answer = function(req,res){
+	var almacen = ++req.query.fallos;
 	var resultado = 'Incorrecto';
 	if(req.query.respuesta === req.quiz.respuesta){
 		resultado = 'Correcto';
-	}
-	res.render('quizes/answer',{quiz: req.quiz, respuesta: resultado});
+		almacen=0;
+	}	
+	res.render('quizes/answer',{quiz: req.quiz, respuesta: resultado, suma: almacen});
 };
 
 //GET /quiz/new
-
 exports.new = function(req,res) {
 	var quiz = models.Quiz.build({
 		pregunta: 'Pregunta',
@@ -49,7 +47,6 @@ exports.new = function(req,res) {
 }
 
 //POST /quiz/create
-
 exports.create = function(req,res){
 	var quiz=models.Quiz.build(req.body.quiz);
 	quiz.validate().then(function(err){
