@@ -4,4 +4,5 @@
 	<input type="submit" name="Enviar" value="Enviar">
 	<input type="hidden" name="fallos" value="<%=fallos%>">
 </form>
-<%if(fallos!=0){%> <%=quiz.respuesta[0]%> <%}%>
+
+<%if(fallos!=0){%><p>Pista: <%if(fallos<quiz.respuesta.length){for(var i=0;i<fallos;i++){%> <%=quiz.respuesta[i]%> <%}}else{%><%=quiz.respuesta%> <%}}%></p>
