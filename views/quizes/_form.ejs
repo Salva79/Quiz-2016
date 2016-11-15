@@ -1,5 +1,11 @@
 <label for="preg" class="rem">Pregunta:</label>
-<p><input type="text" id="preg" name="quiz[pregunta]" placeholder="<%= quiz.pregunta %>"/></p>
-<p><input type="text" id="resp" name="quiz[respuesta]" placeholder="<%= quiz.respuesta %>"/></p>
+
+<p><input type="text" id="preg" name="quiz[pregunta]" value="<%= quiz.pregunta %>" <% if(quiz.pregunta){%> placeholder="Pregunta" <% }%>/></p>
+
+ 
+
+<p><input type="text" id="resp" name="quiz[respuesta]" value="<%= quiz.respuesta %>" <% if(!quiz.pregunta){%> placeholder="Respuesta" <% }%>/></p>
+
+
 <a href="/quizes"><button type="button">Cancelar</button></a>
 <input type="submit" value="Salvar">
