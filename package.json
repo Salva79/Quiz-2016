@@ -12,6 +12,7 @@
     "ejs": "~2.4.1",
     "express": "~4.13.4",
     "express-partials": "^0.3.0",
+    "express-session": "^1.14.2",
     "method-override": "^2.3.6",
     "morgan": "~1.7.0",
     "sequelize": "^3.24.6",

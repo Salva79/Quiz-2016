@@ -1,12 +1,19 @@
 var express = require('express');
 var router = express.Router();
 var quizController=require('../controllers/quiz_controller');
-var commentController=require('../controllers/comment_controller') 
+var commentController=require('../controllers/comment_controller');
+var sessionController=require('../controllers/session_controller'); 
 
 /* GET home page. */
 router.get('/', function(req, res, next) {res.render('index', { title: 'Quiz-2016', errors: []});});
-
+//Autoload de comandos con quizid
 router.param('quizId', quizController.load);
+
+//Definición de rutas de sesion
+router.get('/login',sessionController.new); //formulario login
+router.post('/login',sessionController.create); //crear sesion
+router.get('/logout',sessionController.destroy); //destruir sesion
+
 
 /* GET de quizes */
 router.get('/quizes', quizController.index);
