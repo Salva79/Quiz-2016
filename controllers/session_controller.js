@@ -1,3 +1,12 @@
+//autorizacion de acceso http restringido
+exports.loginRequiered = function(req,res,next){
+	if(req.session.user){
+		next();
+	}else{
+		res.redirect('/login');
+	}
+};
+
 //Get /login  --Formulario de login
 exports.new = function(req,res){
 	var errors=req.session.errors || {};
@@ -12,7 +21,7 @@ exports.create = function(req,res){
 	var userController= require('./user_controller');
 	userController.autenticar(login,password,function(error,user){
 		if(error){ //si hay error retornamos mensajes de error de sesion
-			req.session.errors = [{"message": 'Se ha producido un error: +error'}];
+			req.session.errors = [{"message": 'Se ha producido un error: ' +error}];
 			res.redirect("/login");
 			return;
 		}
@@ -20,8 +29,6 @@ exports.create = function(req,res){
 		//La sesion se define por la existencia de req.session.user
 		req.session.user = {id: user.id, username: user.username};
 		res.redirect(req.session.redir.toString()); //redireccion a path anterior a login
-
-
 	});
 };
 
