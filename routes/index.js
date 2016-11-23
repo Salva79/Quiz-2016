@@ -24,7 +24,7 @@ router.get('/quizes/new', 					sessionController.loginRequiered, quizController.
 router.post('/quizes/create', 				sessionController.loginRequiered, quizController.create);
 router.get('/quizes/:quizId(\\d+)/edit', 	sessionController.loginRequiered, quizController.edit);
 router.put('/quizes/:quizId(\\d+)', 		sessionController.loginRequiered, quizController.update);
-router.delete('/quizes/:quizId(\\d+)', 		sessionController.loginRequiered, quizController.destroy);
+router.delete('/quizes/:quizId(\\d+)', 		sessionController.adminRequiered, quizController.destroy);
 
 router.get('/quizes/:quizId(\\d+)/comments/new', commentController.new);
 router.post('/quizes/:quizId(\\d+)/comments', commentController.create);
