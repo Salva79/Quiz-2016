@@ -6,8 +6,10 @@ var sessionController=require('../controllers/session_controller');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {res.render('index', { title: 'Quiz-2016', errors: []});});
+
 //Autoload de comandos con quizid
 router.param('quizId', quizController.load);
+router.param('commentId',commentController.load);
 
 //Definición de rutas de sesion
 router.get('/login',sessionController.new); //formulario login
@@ -26,8 +28,9 @@ router.get('/quizes/:quizId(\\d+)/edit', 	sessionController.loginRequiered, quiz
 router.put('/quizes/:quizId(\\d+)', 		sessionController.loginRequiered, quizController.update);
 router.delete('/quizes/:quizId(\\d+)', 		sessionController.adminRequiered, quizController.destroy);
 
+//Definicion de rutas de comentarios
 router.get('/quizes/:quizId(\\d+)/comments/new', commentController.new);
 router.post('/quizes/:quizId(\\d+)/comments', commentController.create);
-
+router.get('/quizes/:quizId(\\d+)/comments/:commentId(\\d+)/publish', sessionController.loginRequiered, commentController.publish);
 
 module.exports = router;
