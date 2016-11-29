@@ -1,0 +1,21 @@
+<h2>New User</h2>
+<form method='POST' action='/user/create'>
+	<div class="field">
+		<label for="new_user">New User:</label><br>
+		<input type="text" id="username" name="user[username]" size="30">
+	</div>
+
+	<div class="field">
+		<label for="password">Password:</label><br>
+		<input type="password" id="password" name="user[password]" size="30">
+	</div>
+
+	<div class="field">
+		<label for="password2">Comprobación Password:</label><br>
+		<input type="password" id="password2" name="user[password2]" size="30">
+	</div>
+
+	<span class="actions">
+		<input name="commit" type="submit" value="New User">
+	</span>
+</form><a href="/user"><button type="button">Cancelar</button></a>
