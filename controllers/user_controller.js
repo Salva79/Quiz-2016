@@ -25,18 +25,19 @@ exports.new = function(req,res){
 //Recogemos el formulario para guardar
 exports.create = function(req,res){
 	var user = models.users.build(req.body.user);
-	if(user.password !== user.password2){
-		res.render('user/new',{user: user, errors: "no coinciden las contraseñas"});
-	}else{
-		user.validate().then(function(err){
-			if(err){
-				res.render('user/new',{user: user, errors: err.errors});
+	user.validate().then(function(err){
+		if(err){
+			res.render('user/new',{user: user, errors: err.errors});
+		}else{
+			if(user.password !== user.password2){
+				res.render('user/new',{user: user, errors: [{message: 'No coinciden los password'}]});
 			}else{
 				user.save({fields: ["username","password"]}).then(function(){
-					res.redirect('/user')});		
-			}	
-		})
-	}
+				res.redirect('/user')});		
+			}
+		}	
+		});
+	
 	
 }
 
