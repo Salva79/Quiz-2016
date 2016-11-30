@@ -1,0 +1,5 @@
+<p>Edite al usuario:</p>
+<form method="post" action="/user/<%= user.id %>?_method=put">
+<% include _form.ejs%>
+</form>
+<a href="/user"><button type="button">Cancelar</button></a>

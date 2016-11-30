@@ -1,0 +1,18 @@
+	<div class="field">
+		<label for="new_user">User:</label><br>
+		<input type="text" id="username" name="user[username]"  size="30" <%if(user.username){ %> value="<%=user.username%>" <% }%>>
+	</div>
+
+	<div class="field">
+		<label for="password">Password:</label><br>
+		<input type="password" id="password" name="user[password]" size="30">
+	</div>
+
+	<div class="field">
+		<label for="password2">Comprobación Password:</label><br>
+		<input type="password" id="password2" name="user[password2]" size="30">
+	</div>
+
+	<span class="actions">
+		<input name="commit" type="submit" value="Salvar">
+	</span>

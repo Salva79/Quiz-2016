@@ -11,6 +11,7 @@ router.get('/', function(req, res, next) {res.render('index', { title: 'Quiz-201
 //Autoload de comandos con quizid
 router.param('quizId', quizController.load);
 router.param('commentId',commentController.load);
+router.param('userId', userController.load);
 
 //Definición de rutas de sesion
 router.get('/login',sessionController.new); //formulario login
@@ -38,6 +39,7 @@ router.get('/quizes/:quizId(\\d+)/comments/:commentId(\\d+)/publish', sessionCon
 router.get('/user', userController.index);
 router.get('/user/new', userController.new);
 router.post('/user/create', userController.create);
+router.get('/user/:userId(\\d+)/edit', 	sessionController.loginRequiered, userController.edit);
 
 
 

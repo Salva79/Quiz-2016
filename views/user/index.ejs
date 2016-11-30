@@ -2,6 +2,28 @@
 <% var i; for(i=0; i < users.length; i++) { %>
 	<tr>
 		<td><%= users[i].username %></td>
+		<%if(session.user){ 
+			if((session.user.username === 'admin') || (session.user.username === users[i].username)){%>
+			<td><a href="/user/<%= users[i].id %>/edit"><button>editar</button></a></td>
+		<%}%>		
+		<%if((session.user) && (session.user.username === 'admin')){%>
+			<td>
+				<form method="post" action="/user/<%= users[i].id %>?_method=delete">
+					<button type="submit" onClick="return confirm('Borrar: <%=users[i].username%>');">borrar</button>	
+				</form>
+			</td>	
+		<%}}%>
 	</tr>
 <% } %>
 </table>
+
+
+
+
+
+		
+		
+			
+			
+			
+		

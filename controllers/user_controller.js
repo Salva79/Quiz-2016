@@ -29,20 +29,38 @@ exports.create = function(req,res){
 		if(err){
 			res.render('user/new',{user: user, errors: err.errors});
 		}else{
-			if(user.password !== user.password2){
+			if(user.password !== req.body.user['password2']){
 				res.render('user/new',{user: user, errors: [{message: 'No coinciden los password'}]});
 			}else{
 				user.save({fields: ["username","password"]}).then(function(){
 				res.redirect('/user')});		
 			}
 		}	
-		});
-	
-	
-}
+	});	
+};
 
 exports.index =function(req,res){
 	models.users.findAll().then(function(users){
 		res.render('user/index',{users: users});			
 	})	
 };
+
+exports.load = function(req,res,next,userId){
+	models.users.findOne({
+		where: { id: Number(userId)}
+	}).then(function(user){
+		if(user){
+			req.user = user;
+			next();
+		}else{
+			next(new Error('No existe user Id= ' + userId));
+		}
+	}).catch(function(error){
+		next(error);
+	});
+};
+
+exports.edit = function(req,res) {
+	var user = req.user;
+	res.render('user/edit', {user: user});
+}
