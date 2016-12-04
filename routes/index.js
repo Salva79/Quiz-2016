@@ -39,8 +39,9 @@ router.get('/quizes/:quizId(\\d+)/comments/:commentId(\\d+)/publish', sessionCon
 router.get('/user', userController.index);
 router.get('/user/new', userController.new);
 router.post('/user/create', userController.create);
-router.get('/user/:userId(\\d+)/edit', 	sessionController.loginRequiered, userController.edit);
-
+router.get('/user/:userId(\\d+)/edit', 	sessionController.adminRequiered, userController.edit);
+router.put('/user/:userId(\\d+)', 		sessionController.adminRequiered, userController.update);
+router.delete('/user/:userId(\\d+)', 	sessionController.adminRequiered, userController.destroy);
 
 
 module.exports = router;

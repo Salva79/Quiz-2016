@@ -5,12 +5,12 @@
 
 	<div class="field">
 		<label for="password">Password:</label><br>
-		<input type="password" id="password" name="user[password]" size="30">
+		<input type="password" id="password" name="user[password]" size="30" <%if(user.username){ %> value="<%=user.password%>" <% }%>>
 	</div>
 
 	<div class="field">
 		<label for="password2">Comprobación Password:</label><br>
-		<input type="password" id="password2" name="user[password2]" size="30">
+		<input type="password" id="password2" name="user[password2]" size="30" <%if(user.username){ %> value="<%=user.password%>" <% }%>>
 	</div>
 
 	<span class="actions">
