@@ -37,6 +37,18 @@ exports.answer = function(req,res){
 	var resultado = 'Incorrecto';
 	if(req.query.respuesta === req.quiz.respuesta){
 		resultado = 'Correcto';
+
+		if(req.session.user){
+			var userController= require('./user_controller');
+			userController.acierto(req,function(error){
+				if(error){ //si hay error retornamos mensajes de error de sesion
+					req.session.errors = [{"message": 'Se ha producido un error: ' + error}];
+				return;
+				}
+			});
+		}
+		
+
 	}
 	res.render('quizes/answer',{quiz: req.quiz, respuesta: resultado});
 };

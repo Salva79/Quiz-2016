@@ -22,7 +22,7 @@ router.get('/logout',sessionController.destroy); //destruir sesion
 /* GET de quizes */
 router.get('/quizes', quizController.index);
 router.get('/quizes/:quizId(\\d+)', quizController.show);
-router.get('/quizes/:quizId(\\d+)/answer',quizController.answer);
+router.get('/quizes/:quizId(\\d+)/answer', quizController.answer);
 
 router.get('/quizes/new', 					sessionController.loginRequiered, quizController.new);
 router.post('/quizes/create', 				sessionController.loginRequiered, quizController.create);
