@@ -92,22 +92,6 @@ exports.destroy = function(req, res){
 
 //Aciertos
 exports.acierto = function(req,callback){
-	var id = req.session.user.id;
-	models.users.findOne({
-		where: { id: id}
-	}).then(function(user){
-		user.aciertos+=1;
-		console.log(user);
-		user.validate().then(
-			function(err){
-				if(err){
-					callback(new Error('Error al guardar aciertos aciertos.'));
-				}else{
-					user.save({fields: ["aciertos"]}).then(callback(null));		
-				}
-			}
-		)
-	}).catch(function(error){
-		callback(error);
-	});
+	var aciertos = req.session.user.aciertos;
+	req.session.user.aciertos = aciertos +1;
 }
