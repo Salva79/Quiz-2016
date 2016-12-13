@@ -1,6 +1,5 @@
 var models=require('../models/models.js');
 
-
 //Comprueba si el usuario esta registrado en users
 //Si autenticación falla o hay errores se ejecuta callback(error)
 
@@ -70,7 +69,7 @@ exports.edit = function(req,res) {
 exports.update = function(req,res){
 	req.user.username = req.body.user.username;
 	req.user.password = req.body.user.password;
-
+	
 	req.user.validate().then(
 		function(err){
 			if(err){
@@ -91,23 +90,12 @@ exports.destroy = function(req, res){
 }
 
 //Aciertos
-exports.acierto = function(req,callback){
-	var id = req.session.user.id;
-	models.users.findOne({
-		where: { id: id}
-	}).then(function(user){
-		user.aciertos+=1;
-		console.log(user);
-		user.validate().then(
-			function(err){
-				if(err){
-					callback(new Error('Error al guardar aciertos aciertos.'));
-				}else{
-					user.save({fields: ["aciertos"]}).then(callback(null));		
-				}
-			}
-		)
-	}).catch(function(error){
-		callback(error);
-	});
+exports.acierto = function(req,res,callback){
+	if(!req.cookie){
+		res.cookie('aciertos', '0');
+	}else{
+		var aciertos = parseInt(req.cookie.aciertos)+1;
+		res.cookie('aciertos', aciertos);
+	}
+	callback(null);
 }

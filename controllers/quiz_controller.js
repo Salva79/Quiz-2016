@@ -40,17 +40,15 @@ exports.answer = function(req,res){
 
 		if(req.session.user){
 			var userController= require('./user_controller');
-			userController.acierto(req,function(error){
+			userController.acierto(req, res,function(error){
 				if(error){ //si hay error retornamos mensajes de error de sesion
 					req.session.errors = [{"message": 'Se ha producido un error: ' + error}];
 				return;
 				}
 			});
 		}
-		
-
 	}
-	res.render('quizes/answer',{quiz: req.quiz, respuesta: resultado});
+	res.render('quizes/answer',{quiz: req.quiz, respuesta: resultado, aciertos: req.cookie.aciertos});
 };
 
 //GET /quiz/new
